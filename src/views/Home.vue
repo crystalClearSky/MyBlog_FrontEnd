@@ -1,18 +1,28 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="hello">
+    <h1>{{ msg }}</h1>
+    <avatar-component/>
+    <div>{{redirectTo()}}</div>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import AvatarComponent from '@/components/AvatarComponent.vue';
 
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+@Component
+export default class Home extends Vue {
+  @Prop() private msg!: string;
+
+  created() {
+    console.log(this.msg);
+  }
+  redirectTo() {
+    this.$router.push('content');
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>
